@@ -99,14 +99,121 @@
                    ['-', '-', '-']];
     function move(element, row, col) {
       console.log(`Element: ${element}, Row: ${row}, col: ${col}`);
-      // Pabaigti. (Vietoj doges turetu but X arba O) hehe
-      element.innerHTML = "<img src='doge.jpg'/>";
-
-      document.getElementById("turnIndicator").innerHTML = "??";
+	if(state[row][col] === '-') 
+{	     
+	if(xturn === true)
+	{
+	 	element.innerHTML = 'X';
+		state[row][col] = 'X';
+	}
+	else
+	{
+		element.innerHTML = 'O';
+		state[row][col] = 'O';
+	}
+	xturn = !xturn;
+	
+	if(xturn === true)
+	{
+		document.getElementById("turnIndicator").innerHTML = "X turn";
+	}
+	else
+	{
+		document.getElementById("turnIndicator").innerHTML = "O turn";
+	}
+}
       checkForWin();
     }
     function checkForWin() {
       // Pabaigti;
+	for(let i = 0; i < state.length; i++)
+	{	
+		for(let j = 0; j < state.length; j++)
+		{
+			if(j !== state.length-1 && state[i][j] !== state[i][j+1])
+			{
+				break;
+			}
+			if (j === state.length-1) {
+				laimejoEilute(i);
+				if(state[i][j] === 'X')
+				document.getElementById("turnIndicator").innerHTML = "X WINS";
+				else if(state[i][j] === 'O')
+				document.getElementById("turnIndicator").innerHTML = "O WINS";
+			}
+		}
+		for(let c = 0; c < state.length; c++)
+		{
+			if(c !== state.length - 1 && state[c][i] !== state[c+1][i]) break;				if(c === state.length-1)
+			{
+				laimejoStulpelis(i);
+				if(state[c][i] === 'X')
+				document.getElementById("turnIndicator").innerHTML = "X WINS";
+				else if(state[c][i] === 'O')
+				document.getElementById("turnIndicator").innerHTML = "O WINS";
+			}
+		}
+	}
+	if(state[0][0] === state[1][1] && state[0][0] === state[2][2])
+	{
+		laimejoIstrizai(0);
+		if(state[0][0] === 'X')
+		document.getElementById("turnIndicator").innerHTML = "X WINS";					else if(state[0][0] === 'O')
+		document.getElementById("turnIndicator").innerHTML = "O WINS";
+	}
+	else if(state[2][0] === state[1][1] && state[2][0] === state[0][2])
+	{
+		laimejoIstrizai(1);
+		if(state[2][0] === 'X')
+		document.getElementById("turnIndicator").innerHTML = "X WINS";					else if(state[2][0] === 'O')
+		document.getElementById("turnIndicator").innerHTML = "O WINS";
+	}
     }
+function laimejoEilute(nr)
+{
+	if(nr === 0)
+	{
+	// .one keiciam	
+	// .two keiciam
+	// .three
+	}
+	else if(nr === 1)
+	{
+	// .4 keiciam	
+	// .5 keiciam
+	// .6
+	}
+	else
+	{
+	// .7 keiciam	
+	// .8 keiciam
+	// .9
+	}
+}
+function laimejoStulpelis(nr)
+{
+	if(nr === 0)
+	{
+	// .one keiciam	
+	// .4 keiciam
+	// .7
+	}
+	else if(nr === 1)
+	{
+	// .4 keiciam	
+	// .5 keiciam
+	// .6
+	}
+	else
+	{
+	// .7 keiciam	
+	// .8 keiciam
+	// .9
+	}
+}
+function laimejoIstrizai(nr)
+{
+
+}	
   </script>
 </html>
